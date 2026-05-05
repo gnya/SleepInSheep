@@ -4,7 +4,8 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import io.github.gnya.sheep_mod.api.IMixinSheep;
 import io.github.gnya.sheep_mod.api.PlayableSheepSleeper;
-import net.minecraft.core.particles.DustParticleOptions;
+import io.github.gnya.sheep_mod.particles.SheepParticleOptions;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.loot.packs.LootData;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -168,6 +169,7 @@ public abstract class SheepMixin extends LivingEntity {
     if (result != InteractionResult.PASS
         || !(this.level() instanceof ServerLevel serverLevel)
         || hand != InteractionHand.MAIN_HAND
+        || player.getItemInHand(hand).get(DataComponents.DYE) != null
         || !this.sheep_mod$canSleepIn()
         || player.isSleeping()
         || !player.isAlive()) {
@@ -209,17 +211,31 @@ public abstract class SheepMixin extends LivingEntity {
   @Inject(method = "aiStep", at = @At("HEAD"))
   public void aiStep(CallbackInfo ci) {
     if (this.sheep_mod$isHappy() && !this.isSheared() && this.isAlive()) {
-      if (this.level().isClientSide()) {
+      if (this.level().isClientSide() && this.tickCount % 3 == 0) {
+        Vec3 center = this.position();
+        Vec3 pos =
+            new Vec3(
+                this.getBbWidth() * this.random.triangle(0.0F, 0.6F),
+                this.getBbHeight() * this.random.triangle(0.0F, 0.4F),
+                this.getBbWidth() * this.random.triangle(0.0F, 0.6F));
+        Vec3 vel =
+            pos.normalize()
+                .scale(0.01F)
+                .multiply(
+                    this.random.triangle(1.0F, 0.3F),
+                    this.random.triangle(1.0F, 0.3F),
+                    this.random.triangle(1.0F, 0.3F));
+
         // Happyな羊からパーティクルを出す
         this.level()
             .addParticle(
-                new DustParticleOptions(this.getColor().getTextureDiffuseColor(), 1.0F),
-                this.getRandomX(0.7),
-                this.getRandomY(),
-                this.getRandomZ(0.7),
-                0.0,
-                0.0,
-                0.0);
+                new SheepParticleOptions(this.getColor().getTextureDiffuseColor(), 1.0F),
+                center.x + pos.x,
+                center.y + pos.y + 0.9F * this.getScale(),
+                center.z + pos.z,
+                vel.x,
+                vel.y,
+                vel.z);
       }
 
       if (this.level() instanceof ServerLevel level

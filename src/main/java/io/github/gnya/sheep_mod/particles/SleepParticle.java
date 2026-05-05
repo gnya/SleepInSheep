@@ -16,22 +16,21 @@ public class SleepParticle extends SingleQuadParticle {
     super(level, x, y, z, sprites.first());
 
     this.gravity = 0.0F;
-    this.lifetime = 60;
     this.yd = 0.005F;
+    this.quadSize *= 0.4F;
     this.alpha = 0.0F;
-
-    this.scale(0.4F);
+    this.lifetime = 60;
   }
 
   @Override
   public void tick() {
-    this.alpha =
-        (float)
-            Mth.smoothstep(
-                Math.min(
-                    Math.min(10, this.age) / 10.0F,
-                    Math.min(15, Math.abs(this.lifetime - this.age)) / 15.0F));
     super.tick();
+
+    float remaining = Math.abs(this.lifetime - this.age);
+    float linearIn = Math.min(10, this.age) / 10.0F;
+    float linearOut = Math.min(15, remaining) / 15.0F;
+
+    this.alpha = (float) Mth.smoothstep(Math.min(linearIn, linearOut));
   }
 
   @Override
