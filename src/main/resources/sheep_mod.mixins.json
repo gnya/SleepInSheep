@@ -17,6 +17,6 @@
     "sleeper.PlayerMixin",
     "sleeper.ServerLevelMixin",
     "sleeper.ServerPlayerMixin",
-    "sleeper.VillagerGoalPackagesMixin"
+    "villager.VillagerGoalPackagesMixin"
   ]
 }
