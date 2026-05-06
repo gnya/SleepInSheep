@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import io.github.gnya.sheep_mod.SheepMod;
 import io.github.gnya.sheep_mod.api.IMixinSheep;
 import io.github.gnya.sheep_mod.api.SheepSleeper;
+import io.github.gnya.sheep_mod.core.SheepModParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -168,7 +169,7 @@ public abstract class LivingEntityMixin extends Entity {
       // 寝ているエンティティからいびきのパーティクルを出す
       this.level()
           .addParticle(
-              SheepMod.SLEEP_PARTICLE.get(),
+              SheepModParticleTypes.SLEEP_PARTICLE,
               this.getRandomX(0.7),
               this.getRandomY() + 0.3,
               this.getRandomZ(0.7),

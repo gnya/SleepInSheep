@@ -2,7 +2,7 @@ package io.github.gnya.sheep_mod.particles;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.github.gnya.sheep_mod.SheepMod;
+import io.github.gnya.sheep_mod.core.SheepModParticleTypes;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ScalableParticleOptionsBase;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -39,7 +39,7 @@ public class SheepParticleOptions extends ScalableParticleOptionsBase {
 
   @Override
   public @NonNull ParticleType<SheepParticleOptions> getType() {
-    return SheepMod.SHEEP_PARTICLE.get();
+    return SheepModParticleTypes.SHEEP_PARTICLE;
   }
 
   public Vector3f getColor() {
