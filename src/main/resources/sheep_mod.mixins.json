@@ -18,8 +18,8 @@
     "sleeper.PlayerMixin",
     "sleeper.ServerLevelMixin",
     "sleeper.ServerPlayerMixin",
-    "villager.VillagerGoalPackagesMixin",
-    "villager.VillagerMixin",
-    "villager.VillagerMixin$VillagerBrainMixin"
+    "villager.BrainProviderMixin",
+    "villager.SleepInBedMixin",
+    "villager.VillagerGoalPackagesMixin"
   ]
 }
