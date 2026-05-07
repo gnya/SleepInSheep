@@ -1,4 +1,4 @@
-package io.github.gnya.sheep_mod.particles;
+package io.github.gnya.sheep_mod.core.particles;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;

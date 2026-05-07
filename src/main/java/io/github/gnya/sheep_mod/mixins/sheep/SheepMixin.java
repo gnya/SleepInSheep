@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import io.github.gnya.sheep_mod.api.IMixinSheep;
 import io.github.gnya.sheep_mod.api.PlayableSheepSleeper;
-import io.github.gnya.sheep_mod.particles.SheepParticleOptions;
+import io.github.gnya.sheep_mod.core.particles.SheepParticleOptions;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.loot.packs.LootData;
 import net.minecraft.network.syncher.EntityDataAccessor;

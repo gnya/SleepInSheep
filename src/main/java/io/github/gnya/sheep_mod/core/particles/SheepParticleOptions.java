@@ -1,4 +1,4 @@
-package io.github.gnya.sheep_mod.particles;
+package io.github.gnya.sheep_mod.core.particles;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

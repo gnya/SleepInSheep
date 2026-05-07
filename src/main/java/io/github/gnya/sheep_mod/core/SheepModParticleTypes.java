@@ -1,9 +1,9 @@
 package io.github.gnya.sheep_mod.core;
 
 import com.mojang.serialization.MapCodec;
-import io.github.gnya.sheep_mod.particles.SheepParticle;
-import io.github.gnya.sheep_mod.particles.SheepParticleOptions;
-import io.github.gnya.sheep_mod.particles.SleepParticle;
+import io.github.gnya.sheep_mod.core.particles.SheepParticle;
+import io.github.gnya.sheep_mod.core.particles.SheepParticleOptions;
+import io.github.gnya.sheep_mod.core.particles.SleepParticle;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
