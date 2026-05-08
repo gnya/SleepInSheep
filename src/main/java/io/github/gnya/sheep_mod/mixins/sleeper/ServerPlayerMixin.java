@@ -9,17 +9,12 @@ import java.util.List;
 import java.util.function.Consumer;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Unit;
 import net.minecraft.world.attribute.BedRule;
 import net.minecraft.world.attribute.EnvironmentAttributes;
-import net.minecraft.world.entity.PositionMoveRotation;
-import net.minecraft.world.entity.Relative;
 import net.minecraft.world.entity.animal.sheep.Sheep;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -32,10 +27,6 @@ import org.spongepowered.asm.mixin.*;
 @Mixin(ServerPlayer.class)
 @Implements(@Interface(iface = PlayableSheepSleeper.class, prefix = "sheep_mod$"))
 public abstract class ServerPlayerMixin extends Player {
-  @Shadow public ServerGamePacketListenerImpl connection;
-
-  @Shadow @Final private MinecraftServer server;
-
   public ServerPlayerMixin(Level level, GameProfile gameProfile) {
     super(level, gameProfile);
   }
@@ -52,13 +43,6 @@ public abstract class ServerPlayerMixin extends Player {
 
     this.resetStat(Stats.CUSTOM.get(Stats.TIME_SINCE_REST));
     ((SheepSleeper) this).LivingEntity$startSleeping(sheep);
-
-    // ServerPlayer.startRidingの中身と同じ処理です
-    sheep.positionRider(this);
-    this.connection.teleport(
-        new PositionMoveRotation(this.position(), Vec3.ZERO, 0.0F, 0.0F), Relative.ROTATION);
-    this.server.getPlayerList().sendActiveEffects(sheep, this.connection);
-    this.connection.send(new ClientboundSetPassengersPacket(sheep));
   }
 
   public Either<BedSleepingProblem, Unit> sheep_mod$startSleepInBed(final Sheep sheep) {

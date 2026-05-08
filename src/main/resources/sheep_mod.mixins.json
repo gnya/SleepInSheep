@@ -13,7 +13,6 @@
     "screen.GuiMixin",
     "sheep.EatBlockGoalMixin",
     "sheep.SheepMixin",
-    "sleeper.EntityAccessor",
     "sleeper.LivingEntityMixin",
     "sleeper.PlayerMixin",
     "sleeper.ServerLevelMixin",

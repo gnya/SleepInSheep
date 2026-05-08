@@ -34,15 +34,12 @@ public abstract class LivingEntityMixin extends Entity {
     super(type, level);
   }
 
-  // LivingEntity.stopRiding()を呼び出すために必要
+  // LivingEntityでstopRiding()がOverrideされてるためこの定義が必要です
   @Shadow
   public abstract void stopRiding();
 
   @Shadow
   public abstract boolean isSleeping();
-
-  @Shadow
-  public abstract @NonNull EntityDimensions getDimensions(@NonNull Pose pose);
 
   @Shadow
   public abstract boolean isAlive();
@@ -68,25 +65,6 @@ public abstract class LivingEntityMixin extends Entity {
     }
   }
 
-  @Override
-  public @NonNull Vec3 getVehicleAttachmentPoint(final @NonNull Entity vehicle) {
-    if (this.sheep_mod$isSleepInSheep() && vehicle instanceof Sheep sheep) {
-      // 羊の上で寝たときの頭の相対位置を返します
-      // x: 0.0
-      // y: -(8.0 + 1.75) / 16
-      // z: (8.0 + 1.75 - ZOffset(0.5)) / 16 - EyeHeight(1.62) / SheepScale(2.0)
-      return this.getType()
-          .getDimensions()
-          .attachments()
-          .get(EntityAttachment.VEHICLE, 0, 0.0F)
-          .add(0.0, -0.609375, -0.231875)
-          .scale(sheep.getScale())
-          .yRot((float) Math.toRadians(-sheep.yBodyRot));
-    } else {
-      return super.getVehicleAttachmentPoint(vehicle);
-    }
-  }
-
   @ModifyReturnValue(method = "checkBedExists", at = @At("RETURN"))
   private boolean modifyCheckBedExists(boolean exists) {
     Sheep sheep = this.sheep_mod$getBedSheep();
@@ -104,29 +82,21 @@ public abstract class LivingEntityMixin extends Entity {
   }
 
   public void sheep_mod$LivingEntity$startSleeping(final Sheep sheep) {
-    SheepMod.LOGGER.debug("LivingEntity$startSleeping");
-
     if (!((IMixinSheep) sheep).canSleepIn()
         || this.isSleeping()
         || !this.canRide(sheep)
-        || !sheep.getPassengers().isEmpty()) {
+        || !sheep.getPassengers().isEmpty()
+        || !this.startRiding(sheep, false, true)) {
       return;
     }
 
-    if (this.isPassenger()) {
-      this.stopRiding();
-    }
+    SheepMod.LOGGER.debug("LivingEntity$startSleeping");
 
-    this.setPose(Pose.SLEEPING);
     this.private$setSleepInSheepType(
         this.random.nextBoolean()
             ? SheepSleeper.SleepType.FACE_UP
             : SheepSleeper.SleepType.FACE_DOWN);
-    this.setDeltaMovement(Vec3.ZERO);
-    ((EntityAccessor) this).setVehicle(sheep);
-    ((EntityAccessor) sheep).callAddPassenger(this);
     sheep.playSound(SoundEvents.WOOL_HIT, 1.0F, this.random.triangle(1.0F, 0.2F));
-    this.needsSync = true;
   }
 
   @Inject(method = "stopSleeping", at = @At("HEAD"), cancellable = true)
@@ -138,7 +108,6 @@ public abstract class LivingEntityMixin extends Entity {
     SheepMod.LOGGER.debug("stopSleeping: %s".formatted(this));
 
     this.stopRiding();
-    this.setPose(Pose.STANDING);
     this.private$setSleepInSheepType(SheepSleeper.SleepType.NONE);
     ci.cancel();
   }
@@ -158,6 +127,36 @@ public abstract class LivingEntityMixin extends Entity {
     int ordinal = input.getIntOr("SleepInSheep", SheepSleeper.SleepType.NONE.ordinal());
 
     this.private$setSleepInSheepType(SheepSleeper.SleepType.values()[ordinal]);
+  }
+
+  // RendererなどでPoseを見られるので羊で寝ている場合はPose.SLEEPを返すようにする
+  @Override
+  public @NonNull Pose getPose() {
+    if (this.sheep_mod$isSleepInSheep()) {
+      return Pose.SLEEPING;
+    } else {
+      return super.getPose();
+    }
+  }
+
+  @Override
+  public @NonNull Vec3 getVehicleAttachmentPoint(final @NonNull Entity vehicle) {
+    if (this.sheep_mod$isSleepInSheep() && vehicle instanceof Sheep sheep) {
+      // TODO 何故か村人の場合はEntityAttachment.VEHICLEがゼロを返してくる
+      // 羊の上で寝たときの頭の相対位置を返します
+      // x: 0.0
+      // y: -(8.0 + 1.75) / 16
+      // z: (8.0 + 1.75 - ZOffset(0.5)) / 16 - EyeHeight(1.62) / SheepScale(2.0)
+      return this.getType()
+          .getDimensions()
+          .attachments()
+          .get(EntityAttachment.VEHICLE, 0, 0.0F)
+          .add(0.0, -0.609375, -0.231875)
+          .scale(sheep.getScale())
+          .yRot((float) Math.toRadians(-sheep.yBodyRot));
+    } else {
+      return super.getVehicleAttachmentPoint(vehicle);
+    }
   }
 
   @Inject(method = "tick", at = @At("TAIL"))
