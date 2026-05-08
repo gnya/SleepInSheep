@@ -85,8 +85,7 @@ public abstract class LivingEntityMixin extends Entity {
     if (!((IMixinSheep) sheep).canSleepIn()
         || this.isSleeping()
         || !this.canRide(sheep)
-        || !sheep.getPassengers().isEmpty()
-        || !this.startRiding(sheep, false, true)) {
+        || !sheep.getPassengers().isEmpty()) {
       return;
     }
 
@@ -96,7 +95,12 @@ public abstract class LivingEntityMixin extends Entity {
         this.random.nextBoolean()
             ? SheepSleeper.SleepType.FACE_UP
             : SheepSleeper.SleepType.FACE_DOWN);
-    sheep.playSound(SoundEvents.WOOL_HIT, 1.0F, this.random.triangle(1.0F, 0.2F));
+
+    if (this.startRiding(sheep, false, true)) {
+      sheep.playSound(SoundEvents.WOOL_HIT, 1.0F, this.random.triangle(1.0F, 0.2F));
+    } else {
+      this.private$setSleepInSheepType(SheepSleeper.SleepType.NONE);
+    }
   }
 
   @Inject(method = "stopSleeping", at = @At("HEAD"), cancellable = true)

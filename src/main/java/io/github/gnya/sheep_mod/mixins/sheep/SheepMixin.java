@@ -28,6 +28,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -69,7 +70,7 @@ public abstract class SheepMixin extends LivingEntity {
   private static final EntityDataAccessor<Boolean> DATA_HAPPY =
       SynchedEntityData.defineId(SheepMixin.class, EntityDataSerializers.BOOLEAN);
 
-  @Unique private int sheep_mod$woolTime;
+  @Unique private int private$woolTime;
 
   private SheepMixin(EntityType<? extends LivingEntity> type, Level level) {
     // ダミーコンストラクタ
@@ -78,7 +79,7 @@ public abstract class SheepMixin extends LivingEntity {
 
   @Inject(method = "<init>", at = @At("TAIL"))
   public void onInit(EntityType<Entity> type, Level level, CallbackInfo ci) {
-    this.sheep_mod$woolTime =
+    this.private$woolTime =
         this.random.nextInt(HAPPY_SHEEP_DROP_INTERVAL) + HAPPY_SHEEP_DROP_INTERVAL;
   }
 
@@ -170,6 +171,7 @@ public abstract class SheepMixin extends LivingEntity {
         || !(this.level() instanceof ServerLevel serverLevel)
         || hand != InteractionHand.MAIN_HAND
         || player.getItemInHand(hand).get(DataComponents.DYE) != null
+        || player.getItemInHand(hand).is(Items.SHEARS)
         || !this.sheep_mod$canSleepIn()
         || player.isSleeping()
         || !player.isAlive()) {
@@ -240,14 +242,14 @@ public abstract class SheepMixin extends LivingEntity {
 
       if (this.level() instanceof ServerLevel level
           && !this.isBaby()
-          && --this.sheep_mod$woolTime <= 0) {
+          && --this.private$woolTime <= 0) {
         // Happyな羊から時々羊毛がドロップする
         var wool = LootData.WOOL_ITEM_BY_DYE.get(this.getColor()).asItem().getDefaultInstance();
 
         super.spawnAtLocation(level, wool, 1.0F);
         this.playSound(SoundEvents.WOOL_HIT, 1.0F, this.random.triangle(1.0F, 0.2F));
         this.gameEvent(GameEvent.ENTITY_PLACE);
-        this.sheep_mod$woolTime =
+        this.private$woolTime =
             this.random.nextInt(HAPPY_SHEEP_DROP_INTERVAL) + HAPPY_SHEEP_DROP_INTERVAL;
       }
     }

@@ -11,6 +11,7 @@
     "screen.ClientboundSetPassengersPacketMixin",
     "screen.ClientPacketListenerMixin",
     "screen.GuiMixin",
+    "screen.LocalPlayerMixin",
     "sheep.EatBlockGoalMixin",
     "sheep.SheepMixin",
     "sleeper.LivingEntityMixin",
