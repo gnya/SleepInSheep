@@ -1,8 +1,8 @@
 package io.github.gnya.sheep_mod.mixins.screen;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import io.github.gnya.sheep_mod.api.IMixinClientboundSetPassengersPacket;
-import io.github.gnya.sheep_mod.api.SheepSleeper;
+import io.github.gnya.sheep_mod.api.mixins.IMixinClientboundSetPassengersPacket;
+import io.github.gnya.sheep_mod.api.mixins.SheepSleeper;
 import java.util.BitSet;
 import java.util.List;
 import net.minecraft.network.FriendlyByteBuf;

@@ -2,8 +2,8 @@ package io.github.gnya.sheep_mod.mixins.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import io.github.gnya.sheep_mod.api.IMixinLivingEntityRenderState;
-import io.github.gnya.sheep_mod.api.SheepSleeper;
+import io.github.gnya.sheep_mod.api.mixins.IMixinLivingEntityRenderState;
+import io.github.gnya.sheep_mod.api.mixins.SheepSleeper;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.world.entity.LivingEntity;

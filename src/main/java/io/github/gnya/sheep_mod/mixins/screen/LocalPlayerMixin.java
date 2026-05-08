@@ -1,6 +1,6 @@
 package io.github.gnya.sheep_mod.mixins.screen;
 
-import io.github.gnya.sheep_mod.api.IMixinLocalPlayer;
+import io.github.gnya.sheep_mod.api.mixins.IMixinLocalPlayer;
 import net.minecraft.client.player.LocalPlayer;
 import org.spongepowered.asm.mixin.Implements;
 import org.spongepowered.asm.mixin.Interface;

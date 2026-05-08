@@ -1,6 +1,6 @@
 package io.github.gnya.sheep_mod.core.sensing;
 
-import io.github.gnya.sheep_mod.api.IMixinSheep;
+import io.github.gnya.sheep_mod.api.mixins.IMixinSheep;
 import io.github.gnya.sheep_mod.core.SheepModMemoryModuleTypes;
 import java.util.List;
 import java.util.Set;
@@ -30,7 +30,7 @@ public class BedSheepSensor extends Sensor<LivingEntity> {
         entities.stream()
             .filter(e -> e instanceof Sheep && ((IMixinSheep) e).canSleepIn())
             .findFirst();
-    
+
     body.getBrain().setMemory(SheepModMemoryModuleTypes.NEAREST_BED_SHEEP, sheep);
   }
 }

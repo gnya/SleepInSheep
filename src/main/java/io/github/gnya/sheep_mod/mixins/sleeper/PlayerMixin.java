@@ -2,8 +2,8 @@ package io.github.gnya.sheep_mod.mixins.sleeper;
 
 import com.mojang.datafixers.util.Either;
 import io.github.gnya.sheep_mod.SheepMod;
-import io.github.gnya.sheep_mod.api.PlayableSheepSleeper;
-import io.github.gnya.sheep_mod.api.SheepSleeper;
+import io.github.gnya.sheep_mod.api.mixins.PlayableSheepSleeper;
+import io.github.gnya.sheep_mod.api.mixins.SheepSleeper;
 import java.util.function.Consumer;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.Avatar;

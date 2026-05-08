@@ -1,6 +1,6 @@
 package io.github.gnya.sheep_mod.mixins.sleeper;
 
-import io.github.gnya.sheep_mod.api.SheepSleeper;
+import io.github.gnya.sheep_mod.api.mixins.SheepSleeper;
 import java.util.List;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

@@ -1,7 +1,7 @@
 package io.github.gnya.sheep_mod.mixins.renderer;
 
-import io.github.gnya.sheep_mod.api.IMixinLivingEntityRenderState;
-import io.github.gnya.sheep_mod.api.SheepSleeper;
+import io.github.gnya.sheep_mod.api.mixins.IMixinLivingEntityRenderState;
+import io.github.gnya.sheep_mod.api.mixins.SheepSleeper;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import org.spongepowered.asm.mixin.Implements;
 import org.spongepowered.asm.mixin.Interface;

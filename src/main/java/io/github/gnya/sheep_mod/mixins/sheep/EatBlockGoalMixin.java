@@ -1,7 +1,7 @@
 package io.github.gnya.sheep_mod.mixins.sheep;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import io.github.gnya.sheep_mod.api.IMixinSheep;
+import io.github.gnya.sheep_mod.api.mixins.IMixinSheep;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import net.minecraft.core.BlockPos;

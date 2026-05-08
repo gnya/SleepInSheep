@@ -1,7 +1,7 @@
 package io.github.gnya.sheep_mod.mixins.screen;
 
-import io.github.gnya.sheep_mod.api.IMixinClientboundSetPassengersPacket;
-import io.github.gnya.sheep_mod.api.IMixinLocalPlayer;
+import io.github.gnya.sheep_mod.api.mixins.IMixinClientboundSetPassengersPacket;
+import io.github.gnya.sheep_mod.api.mixins.IMixinLocalPlayer;
 import java.util.BitSet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientCommonPacketListenerImpl;

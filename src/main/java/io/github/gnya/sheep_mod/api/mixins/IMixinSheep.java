@@ -1,4 +1,4 @@
-package io.github.gnya.sheep_mod.api;
+package io.github.gnya.sheep_mod.api.mixins;
 
 public interface IMixinSheep {
   boolean isHappy();

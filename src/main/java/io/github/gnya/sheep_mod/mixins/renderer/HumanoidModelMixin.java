@@ -1,6 +1,6 @@
 package io.github.gnya.sheep_mod.mixins.renderer;
 
-import io.github.gnya.sheep_mod.api.IMixinLivingEntityRenderState;
+import io.github.gnya.sheep_mod.api.mixins.IMixinLivingEntityRenderState;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import org.objectweb.asm.Opcodes;

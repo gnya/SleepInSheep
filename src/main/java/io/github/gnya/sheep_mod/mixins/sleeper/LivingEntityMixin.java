@@ -2,8 +2,8 @@ package io.github.gnya.sheep_mod.mixins.sleeper;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import io.github.gnya.sheep_mod.SheepMod;
-import io.github.gnya.sheep_mod.api.IMixinSheep;
-import io.github.gnya.sheep_mod.api.SheepSleeper;
+import io.github.gnya.sheep_mod.api.mixins.IMixinSheep;
+import io.github.gnya.sheep_mod.api.mixins.SheepSleeper;
 import io.github.gnya.sheep_mod.core.SheepModParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -146,16 +146,11 @@ public abstract class LivingEntityMixin extends Entity {
   @Override
   public @NonNull Vec3 getVehicleAttachmentPoint(final @NonNull Entity vehicle) {
     if (this.sheep_mod$isSleepInSheep() && vehicle instanceof Sheep sheep) {
-      // TODO 何故か村人の場合はEntityAttachment.VEHICLEがゼロを返してくる
       // 羊の上で寝たときの頭の相対位置を返します
       // x: 0.0
-      // y: -(8.0 + 1.75) / 16
+      // y: -(8.0 + 1.75) / 16 - 0.6
       // z: (8.0 + 1.75 - ZOffset(0.5)) / 16 - EyeHeight(1.62) / SheepScale(2.0)
-      return this.getType()
-          .getDimensions()
-          .attachments()
-          .get(EntityAttachment.VEHICLE, 0, 0.0F)
-          .add(0.0, -0.609375, -0.231875)
+      return new Vec3(0.0, -0.009375, -0.231875)
           .scale(sheep.getScale())
           .yRot((float) Math.toRadians(-sheep.yBodyRot));
     } else {

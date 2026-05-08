@@ -1,6 +1,6 @@
 package io.github.gnya.sheep_mod.mixins.renderer;
 
-import io.github.gnya.sheep_mod.api.SheepSleeper;
+import io.github.gnya.sheep_mod.api.mixins.SheepSleeper;
 import net.minecraft.client.Camera;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;

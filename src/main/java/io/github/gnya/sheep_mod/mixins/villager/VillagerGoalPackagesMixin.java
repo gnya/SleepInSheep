@@ -3,7 +3,7 @@ package io.github.gnya.sheep_mod.mixins.villager;
 import com.google.common.collect.ImmutableList;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.datafixers.util.Pair;
-import io.github.gnya.sheep_mod.api.IMixinSheep;
+import io.github.gnya.sheep_mod.api.mixins.IMixinSheep;
 import java.util.List;
 import java.util.stream.Stream;
 import net.minecraft.world.entity.EntityType;
