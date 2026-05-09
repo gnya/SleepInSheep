@@ -1,3 +1,7 @@
+### 状態
+
+![Build Stats](https://github.com/gnya/SleepInSheep/actions/workflows/build.yml/badge.svg)
+
 ### 未完了
 
 - [ ] 羊から出るパーティクルが微妙なので修正する
