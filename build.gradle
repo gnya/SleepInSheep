@@ -14,6 +14,7 @@ def modLicense = project.modLicense
 def modDescription = project.modDescription
 def modVersion = project.modVersion
 
+def javaVersion = project.javaVersion
 def minecraftVersion = project.minecraftVersion
 def minecraftVersionRange = project.minecraftVersionRange
 def forgeVersion = project.forgeVersion
@@ -24,7 +25,7 @@ def eventbusVersion = project.eventbusVersion
 version = modVersion
 group = "io.github.gnya.${modId}"
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+java.toolchain.languageVersion = JavaLanguageVersion.of(javaVersion)
 
 minecraft {
     runs {

@@ -14,10 +14,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # gradle.propertiesからjavaVersionを抽出して利用する
+      - name: Export java version
+        run: |
+          JAVA_VER=$(grep 'javaVersion' gradle.properties | cut -d'=' -f2)
+          echo "JAVA_VERSION=$JAVA_VER" >> $GITHUB_ENV
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '25'
+          java-version: ${{env.JAVA_VERSION}}
           distribution: 'temurin'
           cache: gradle
 
