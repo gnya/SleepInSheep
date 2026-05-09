@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.gnya.sheep.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "renderer.CameraMixin",
+    "renderer.HumanoidModelMixin",
+    "renderer.LivingEntityRendererMixin",
+    "renderer.LivingEntityRenderStateMixin",
+    "screen.ClientboundSetPassengersPacketMixin",
+    "screen.ClientPacketListenerMixin",
+    "screen.GuiMixin",
+    "screen.LocalPlayerMixin",
+    "sheep.EatBlockGoalMixin",
+    "sheep.SheepMixin",
+    "sleeper.LivingEntityMixin",
+    "sleeper.PlayerMixin",
+    "sleeper.ServerLevelMixin",
+    "sleeper.ServerPlayerMixin",
+    "villager.BrainProviderMixin",
+    "villager.SleepInBedMixin",
+    "villager.VillagerGoalPackagesMixin"
+  ]
+}

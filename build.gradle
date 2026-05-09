@@ -7,8 +7,21 @@ plugins {
     id 'net.minecraftforge.gradle' version '[7.0.17,8)'
 }
 
-version = '0.0.1'
-group = 'io.github.gnya.sheep_mod'
+def modId = project.modId
+def modName = project.modName
+def modLicense = project.modLicense
+def modDescription = project.modDescription
+def modVersion = project.modVersion
+
+def minecraftVersion = project.minecraftVersion
+def minecraftVersionRange = project.minecraftVersionRange
+def forgeVersion = project.forgeVersion
+def forgeVersionRange = project.forgeVersionRange
+def loaderVersionRange = project.loaderVersionRange
+def eventbusVersion = project.eventbusVersion
+
+version = modVersion
+group = "io.github.gnya.${modId}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
@@ -18,11 +31,11 @@ minecraft {
             workingDir = layout.projectDirectory.dir('run')
 
             systemProperty 'eventbus.api.strictRuntimeChecks', 'true'
-            systemProperty 'forge.enabledGameTestNamespaces', 'sheep_mod'
+            systemProperty 'forge.enabledGameTestNamespaces', modId
 
             systemProperty 'forge.logging.console.level', 'debug'
 
-            args "--mixin.config=sheep_mod.mixins.json"
+            args "--mixin.config=${modId}.mixins.json"
         }
 
         register('client')
@@ -43,17 +56,42 @@ repositories {
 }
 
 dependencies {
-    implementation minecraft.dependency('net.minecraftforge:forge:26.1.2-64.0.6')
-    annotationProcessor 'net.minecraftforge:eventbus-validator:7.0.1'
+    implementation minecraft.dependency("net.minecraftforge:forge:${minecraftVersion}-${forgeVersion}")
+    annotationProcessor "net.minecraftforge:eventbus-validator:${eventbusVersion}"
+}
+
+tasks {
+    def props = [
+            'modId'                : modId,
+            'modName'              : modName,
+            'modLicense'           : modLicense,
+            'modDescription'       : modDescription,
+            'modVersion'           : modVersion,
+            'minecraftVersionRange': minecraftVersionRange,
+            'forgeVersionRange'    : forgeVersionRange,
+            'loaderVersionRange'   : loaderVersionRange
+    ]
+
+    // mods.tomlの中をgrade.properties内で設定された値で置き換える
+    processResources {
+        inputs.properties(props)
+        filesMatching('META-INF/mods.toml') {
+            expand props
+        }
+    }
+
+    jar {
+        // .jarファイル名の接頭辞を設定する
+        archiveBaseName = "${modId}-forge-${minecraftVersion}"
+
+        // .jarのマニフェストにMixinの設定ファイルの場所を書き込む
+        manifest {
+            attributes['MixinConfigs'] = "${modId}.mixins.json"
+        }
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
     // UTF-8を使用する（Java 18+ では不要らしいですが、念の為設定しています）
     options.encoding = 'UTF-8'
-}
-
-tasks.named("jar", Jar) {
-    manifest {
-        attributes["MixinConfigs"] = "sheep_mod.mixins.json"
-    }
 }
