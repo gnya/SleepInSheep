@@ -11,7 +11,7 @@ modId = "${modId}"
 version = "${modVersion}"
 displayName = "${modName}"
 displayURL = "https://github.com/gnya/${modId}/"
-authors = "gnya"
+authors = "${modAuthors}"
 displayTest = "MATCH_VERSION"
 description = "${modDescription}"
 

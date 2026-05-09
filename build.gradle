@@ -9,6 +9,7 @@ plugins {
 
 def modId = project.modId
 def modName = project.modName
+def modAuthors = project.modAuthors
 def modLicense = project.modLicense
 def modDescription = project.modDescription
 def modVersion = project.modVersion
@@ -64,6 +65,7 @@ tasks {
     def props = [
             'modId'                : modId,
             'modName'              : modName,
+            'modAuthors'           : modAuthors,
             'modLicense'           : modLicense,
             'modDescription'       : modDescription,
             'modVersion'           : modVersion,
