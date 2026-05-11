@@ -1,10 +1,11 @@
 ### 状態
 
-![Build Stats](https://github.com/gnya/SleepInSheep/actions/workflows/build.yml/badge.svg)
+[![Java CI with Gradle](https://github.com/gnya/SleepInSheep/actions/workflows/build.yml/badge.svg)](https://github.com/gnya/SleepInSheep/actions/workflows/build.yml)
 
 ### 未完了
 
 - [ ] 羊から出るパーティクルが微妙なので修正する
+- [ ] forge以外にも対応させる
 - [ ] テスト(可能なら)、CI/CDの自動化
     - [x] devブランチを作る
     - [x] TODOをREADMEから移動させる
@@ -13,7 +14,7 @@
 
 ### 完了
 
-### 1.0.0-beta0
+### 1.0.0-beta.0
 
 - [x] 村人が羊の上で寝るようにする
     - [x] BedSheepSensorを追加、最寄りの羊を記憶するようにする

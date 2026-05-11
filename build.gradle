@@ -47,6 +47,15 @@ minecraft {
         }
 
         register('gameTestServer')
+
+        gameTestServer {
+            mods {
+                "${modId}" {
+                    source sourceSets.main
+                    source sourceSets.test
+                }
+            }
+        }
     }
 }
 
