@@ -8,7 +8,6 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraftforge.eventbus.api.bus.BusGroup;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -36,9 +35,7 @@ public class ModRegistries {
     return registry;
   }
 
-  public static void init(FMLJavaModLoadingContext context) {
-    var busGroup = context.getModBusGroup();
-
+  public static void init(BusGroup busGroup) {
     REG_INITS.forEach(l -> l.accept(busGroup));
     TYPE_INITS.forEach(Runnable::run);
   }

@@ -11,18 +11,18 @@ modId = "${modId}"
 version = "${modVersion}"
 displayName = "${modName}"
 displayURL = "https://github.com/gnya/${modId}/"
-authors = "gnya"
+authors = "${modAuthors}"
 displayTest = "MATCH_VERSION"
 description = "${modDescription}"
 
-[[dependencies.${modId}]]
+[["dependencies.${modId}"]]
 modId = "forge"
 mandatory = true
 versionRange = "${forgeVersionRange}"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${modId}]]
+[["dependencies.${modId}"]]
 modId = "minecraft"
 mandatory = true
 versionRange = "${minecraftVersionRange}"

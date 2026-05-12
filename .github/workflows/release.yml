@@ -1,0 +1,44 @@
+name: Mod Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # gradle.propertiesからversion情報を抽出して利用する
+      - name: Export version
+        run: |
+          echo "JAVA_VERSION=$(grep '^javaVersion=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_ENV
+          echo "MOD_VERSION=$(grep '^modVersion=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_ENV
+          echo "MINECRAFT_VERSION=$(grep '^minecraftVersion=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_ENV
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{env.JAVA_VERSION}}
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build
+        run: ./gradlew build
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ env.MOD_VERSION }} for Minecraft ${{ env.MINECRAFT_VERSION }}
+          generate_release_notes: true
+          files: build/libs/*.jar

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "sheep:modtests/sheep_color",
+  "max_ticks": 100,
+  "structure": "sheep:empty5x5x5"
+}

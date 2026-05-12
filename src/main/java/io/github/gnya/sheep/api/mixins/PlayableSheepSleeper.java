@@ -14,6 +14,7 @@ public interface PlayableSheepSleeper extends SheepSleeper {
       final Sheep sheep, Consumer<Sheep> startSleeping);
 
   // mixinではsuperが使えないので継承先ごとにメソッドを用意する
+  @SuppressWarnings("unused")
   Either<Player.BedSleepingProblem, Unit> ServerPlayer$startSleepInBed(
       final Sheep sheep, Consumer<Sheep> startSleeping);
 }

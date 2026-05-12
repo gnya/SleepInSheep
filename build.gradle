@@ -9,10 +9,12 @@ plugins {
 
 def modId = project.modId
 def modName = project.modName
+def modAuthors = project.modAuthors
 def modLicense = project.modLicense
 def modDescription = project.modDescription
 def modVersion = project.modVersion
 
+def javaVersion = project.javaVersion
 def minecraftVersion = project.minecraftVersion
 def minecraftVersionRange = project.minecraftVersionRange
 def forgeVersion = project.forgeVersion
@@ -23,7 +25,7 @@ def eventbusVersion = project.eventbusVersion
 version = modVersion
 group = "io.github.gnya.${modId}"
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+java.toolchain.languageVersion = JavaLanguageVersion.of(javaVersion)
 
 minecraft {
     runs {
@@ -45,6 +47,15 @@ minecraft {
         }
 
         register('gameTestServer')
+
+        gameTestServer {
+            mods {
+                "${modId}" {
+                    source sourceSets.main
+                    source sourceSets.test
+                }
+            }
+        }
     }
 }
 
@@ -64,6 +75,7 @@ tasks {
     def props = [
             'modId'                : modId,
             'modName'              : modName,
+            'modAuthors'           : modAuthors,
             'modLicense'           : modLicense,
             'modDescription'       : modDescription,
             'modVersion'           : modVersion,
