@@ -10,6 +10,8 @@
     - [x] devブランチを作る
     - [x] TODOをREADMEから移動させる
         - [x] 過去のTODOも見れるようにする
+    - [x] GameTestを利用したテストの追加
+        - [ ] Loaderがtests以下のクラスを自動で取ってくるようにする
 - [ ] updates.jsonに対応する？
 
 ### 完了
