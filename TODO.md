@@ -1,6 +1,6 @@
 ### 状態
 
-[![Java CI with Gradle](https://github.com/gnya/SleepInSheep/actions/workflows/build.yml/badge.svg)](https://github.com/gnya/SleepInSheep/actions/workflows/build.yml)
+[![Mod Verification](https://github.com/gnya/SleepInSheep/actions/workflows/build.yml/badge.svg)](https://github.com/gnya/SleepInSheep/actions/workflows/build.yml)
 
 ### 未完了
 
