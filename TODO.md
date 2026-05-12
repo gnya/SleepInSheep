@@ -1,12 +1,12 @@
 ### 状態
 
-[![Mod Verification](https://github.com/gnya/SleepInSheep/actions/workflows/build.yml/badge.svg)](https://github.com/gnya/SleepInSheep/actions/workflows/build.yml)
+[![Mod Verification](https://github.com/gnya/SleepInSheep/actions/workflows/verify.yml/badge.svg)](https://github.com/gnya/SleepInSheep/actions/workflows/verify.yml)
 
 ### 未完了
 
 - [ ] 羊から出るパーティクルが微妙なので修正する
 - [ ] forge以外にも対応させる
-- [ ] テスト(可能なら)、CI/CDの自動化
+- [x] テスト(可能なら)、CI/CDの自動化
     - [x] devブランチを作る
     - [x] TODOをREADMEから移動させる
         - [x] 過去のTODOも見れるようにする

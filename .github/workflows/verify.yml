@@ -11,14 +11,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
       # gradle.propertiesからjavaVersionを抽出して利用する
       - name: Export java version
-        run: |
-          JAVA_VER=$(grep 'javaVersion' gradle.properties | cut -d'=' -f2)
-          echo "JAVA_VERSION=$JAVA_VER" >> $GITHUB_ENV
+        run: echo "JAVA_VERSION=$(grep '^javaVersion=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_ENV
 
       - name: Set up JDK
         uses: actions/setup-java@v4
